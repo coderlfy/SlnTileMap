@@ -1,6 +1,4 @@
-﻿
-//创建唯一ID，prefix参数为前缀
-iCatMap.Util = (function () {
+﻿iCatMap.Util = (function () {
     return {
         createUniqueID: function (prefix) {
             if (prefix == null) {

@@ -23,7 +23,6 @@ Ext.Cat.AjaxMap.MapType.prototype = {
             if (model.currentMapType.typeId == mapType.typeId) {
                 //html += '<img src="' + mapType.enableImg + '" style="cursor:pointer;"> ';//取消显示地图类型
             }
-
             else {
                 html += '<img id="Img_' + mapType.typeId + '" src="' + mapType.disableImg + '" style="cursor:pointer;"> ';
                 ids.push("Img_" + mapType.typeId);

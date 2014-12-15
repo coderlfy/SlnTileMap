@@ -59,7 +59,6 @@
   <ItemGroup>
     <Content Include="demo\singlemap.html" />
     <Content Include="ext\ext-all-debug.js" />
-    <Content Include="ext\ext-all.js" />
     <Content Include="ext\include-ext.js" />
     <Content Include="ext\locale\ext-lang-af.js" />
     <Content Include="ext\locale\ext-lang-bg.js" />
@@ -6602,7 +6601,6 @@
     <Content Include="mapjs\geoObject\Rectangle.js" />
     <Content Include="mapjs\geoObject\副本 Marker.js" />
     <Content Include="mapjs\include-icatmap.js" />
-    <Content Include="mapjs\LoadLibFile.js" />
     <Content Include="mapjs\Map.js" />
     <Content Include="mapjs\MapConfig.js" />
     <Content Include="mapjs\MapInit.js" />
@@ -6612,7 +6610,6 @@
     <Content Include="mapjs\model\Tile.js" />
     <Content Include="mapjs\model\Zoom.js" />
     <Content Include="mapjs\namespces.js" />
-    <Content Include="mapjs\Prototype.js" />
     <Content Include="mapjs\toolbar\AbstractTool.js" />
     <Content Include="mapjs\toolbar\Command.js" />
     <Content Include="mapjs\toolbar\EventMarkBaseStation.js" />

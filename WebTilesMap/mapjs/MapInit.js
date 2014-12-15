@@ -1,6 +1,11 @@
 ﻿MapInit = function (lx, baseStores, mWidth, mHeight) {
     Ext.Cat.MapConfig.FullExtent = new Ext.Cat.AjaxMap.Bound(0, 100e16, 0, 50e16); //113.65e16, 114.75e16, 22.35e16, 22.9e16
-    Ext.Cat.MapConfig.FullWidth = Util.distanceByLnglat(Ext.Cat.MapConfig.FullExtent.getMinX() / 1e16, Ext.Cat.MapConfig.FullExtent.getMinY() / 1e16, Ext.Cat.MapConfig.FullExtent.getMaxX() / 1e16, Ext.Cat.MapConfig.FullExtent.getMaxY() / 1e16);
+    Ext.Cat.MapConfig.FullWidth = Util.distanceByLnglat(
+        Ext.Cat.MapConfig.FullExtent.getMinX() / 1e16,
+        Ext.Cat.MapConfig.FullExtent.getMinY() / 1e16,
+        Ext.Cat.MapConfig.FullExtent.getMaxX() / 1e16,
+        Ext.Cat.MapConfig.FullExtent.getMaxY() / 1e16);
+
     var mapTbar = new Ext.Toolbar();
     var mapPanel = new Ext.Panel({
         renderTo: "divID1",
