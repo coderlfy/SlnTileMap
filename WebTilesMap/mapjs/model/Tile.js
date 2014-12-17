@@ -40,8 +40,6 @@ Ext.define('iCatMap.Tile', {
         if (config) {
             Ext.apply(me, config);
         }
-
-
     },
     getRow: function () {
         return this.row;
