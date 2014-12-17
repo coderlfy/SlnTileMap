@@ -21,10 +21,10 @@
     var ICatMapJsFilesPath = [
         'namespces',
         'canvas/Base', 'canvas/IE8canvas', 'canvas/Widget', 'canvas/Painter', 'canvas/CPWidgets', 'canvas/CPDrawing', 'canvas/CPAnimator',
-        'Util.js'//, 'Map.js', 'MapConfig.js', 'MapInit.js',
+        'Util.js', 'model/Tile'//, 'Map.js', 'MapConfig.js', 'MapInit.js',
         //'controls/Control', 'controls/MapControl', 'controls/ScaleControl',
         //'geoObject/Bound', 'geoObject/Canvas', 'geoObject/Coordinate', 'geoObject/Marker', 'geoObject/Point', 'geoObject/Polyline', 'geoObject/Rectangle',
-        //'model/MapModel', 'model/MapType', 'model/OverLayer', 'model/Tile', 'model/Zoom',
+        //'model/MapModel', 'model/MapType', 'model/OverLayer', 'model/Zoom',
         //'toolbar/AbstractTool', 'toolbar/EventMarkBaseStation', 'toolbar/EventMarkSensor', 'toolbar/EventMarkSubStation', 'toolbar/EventMarkTrackerPointer', 'toolbar/EventTracker',
         //'toolbar/ToolBar', 'toolbar/ToolMark', 'toolbar/ToolMarkTrackerPoint', 'toolbar/ToolMeasure', 'toolbar/ToolPan', 'toolbar/ToolTrack', 'toolbar/ToolZoomin', 'toolbar/ToolZoomout'
     ];

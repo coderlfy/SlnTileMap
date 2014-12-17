@@ -72,3 +72,42 @@ Ext.Cat.AjaxMap.Zoom.prototype = {
         }
     }
 }
+/*
+Ext.define('iCatMap.Zoom', {
+    level: 2,
+    tileCols: 4,
+    tileRows: 2,
+    tileNum: null,
+    //scale:
+    constructor: function (config) {
+        var me = this;
+
+        if (config) {
+            Ext.apply(me, config);
+        }
+
+
+    },
+    getRow: function () {
+        return this.row;
+    },
+
+    getColumn: function () {
+        return this.column;
+    },
+
+    getLevel: function () {
+        return this.level;
+    },
+
+    getMapModel: function () {
+        return this.model;
+    },
+
+    getSrc: function () {
+        return this.model.getCurrentMapType().getSrc(this.level, this.row, this.column);
+    }
+
+});
+
+*/
