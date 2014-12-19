@@ -21,9 +21,9 @@
     var ICatMapJsFilesPath = [
         'namespces',
         'canvas/Base', 'canvas/IE8canvas', 'canvas/Widget', 'canvas/Painter', 'canvas/CPWidgets', 'canvas/CPDrawing', 'canvas/CPAnimator',
-        'Util.js', 'model/Tile', 'geoObject/Bound', 'geoObject/Coordinate', 'geoObject/Point', 'model/OverLayer', 'geoObject/Polyline'//'Map.js', 'MapConfig.js', 'MapInit.js',
-        //'controls/Control', 'controls/MapControl', 'controls/ScaleControl',
-        //, 'geoObject/Canvas', 'geoObject/Marker', 'geoObject/Rectangle',
+        'Util.js', 'model/Tile', 'geoObject/Bound', 'geoObject/Coordinate', 'geoObject/Point', 'model/OverLayer', 'geoObject/Polyline', 'MapConfig.js',//'Map.js', 'MapInit.js',
+        'controls/Control', 'controls/MapControl', 'geoObject/Rectangle'//, 'controls/ScaleControl',
+        //, 'geoObject/Canvas', 'geoObject/Marker',
         //'model/MapModel', 'model/MapType', 'model/Zoom',
         //'toolbar/AbstractTool', 'toolbar/EventMarkBaseStation', 'toolbar/EventMarkSensor', 'toolbar/EventMarkSubStation', 'toolbar/EventMarkTrackerPointer', 'toolbar/EventTracker',
         //'toolbar/ToolBar', 'toolbar/ToolMark', 'toolbar/ToolMarkTrackerPoint', 'toolbar/ToolMeasure', 'toolbar/ToolPan', 'toolbar/ToolTrack', 'toolbar/ToolZoomin', 'toolbar/ToolZoomout'

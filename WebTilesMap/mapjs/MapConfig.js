@@ -1,4 +1,4 @@
-﻿Ext.Cat.MapConfig = {
+﻿iCatMap.MapConfig = {
     ImageBaseDir: '../../../maps/',
     TileSize: 256,
     MaxZoomLevel: 4,

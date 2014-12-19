@@ -1,4 +1,5 @@
-﻿Ext.Cat.AjaxMap.Rectangle = function (minX, maxX, minY, maxY) {
+﻿/*
+Ext.Cat.AjaxMap.Rectangle = function (minX, maxX, minY, maxY) {
     this.minX = minX;
     this.maxX = maxX;
     this.minY = minY;
@@ -30,4 +31,63 @@ Ext.Cat.AjaxMap.Rectangle.prototype = {
 	    return this.bound.getCenterCoord();
 	}     
 }
+*/
+Ext.define('iCatMap.Rectangle', {
+    minX: 0,
+    maxX: 0,
+    minY: 0,
+    maxY: 0, bound: null,
+    constructor: function () {
+        var me = this;
 
+        if (config) {
+            Ext.apply(me, config);
+        }
+
+        this.bound = Ext.create('iCatMap.Bound', {
+            minX: minX * 1e16,
+            maxX: maxX * 1e16,
+            minY: minY * 1e16,
+            maxY: maxY * 1e16
+        });
+    },
+    getPixelWidth: function (zoom) {
+        var me = this;
+        //return Math.abs(this.maxX - this.minX);
+        var point1 = Ext.create('iCatMap.Point', {
+            x: me.minX,
+            y: me.maxY
+        });
+        var point2 = Ext.create('iCatMap.Point', {
+            x: me.maxX,
+            y: me.minY
+        });
+        var topleft = iCatMap.Util.getScreenPixel(point1.getCoord(), zoom).x;
+        var bottomright = iCatMap.Util.getScreenPixel(point2.getCoord(), zoom).x;
+        return Math.floor(Math.abs(bottomright - topleft));
+    },
+
+    getPixelHeight: function (zoom) {
+        //return Math.abs(this.maxY - this.minY);
+        var point1 = Ext.create('iCatMap.Point', {
+            x: me.minX,
+            y: me.maxY
+        });
+        var point2 = Ext.create('iCatMap.Point', {
+            x: me.maxX,
+            y: me.minY
+        });
+
+        var topleft = iCatMap.Util.getScreenPixel(point1.getCoord(), zoom).y;
+        var bottomright = iCatMap.Util.getScreenPixel(point2.getCoord(), zoom).y;
+        return Math.floor(Math.abs(topleft - bottomright));
+    },
+
+    getBound: function () {
+        return this.bound;
+    },
+
+    getCenter: function () {
+        return this.bound.getCenterCoord();
+    }
+});

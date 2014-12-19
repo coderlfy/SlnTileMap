@@ -6,7 +6,10 @@
     <script src="../ext/include-ext.js"></script>
 <script type="text/javascript">
     Ext.define('App', {
-        good: 'hello world'
+        good: 'hello world',
+        exec: function () {
+            console.log(this.good);
+        }
     });
 
     Ext.define('AppSub', {
@@ -17,7 +20,7 @@
     })
     Ext.onReady(function () {
         var app = Ext.create('AppSub');
-        console.log(app.go());
+        console.log(app);
     });
 </script>
 </head>
