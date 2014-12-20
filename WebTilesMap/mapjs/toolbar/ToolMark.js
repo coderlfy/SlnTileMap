@@ -25,7 +25,11 @@ Ext.extend(Ext.Cat.AjaxMap.MarkerTool, Ext.Cat.AjaxMap.AbstractTool, {
 
         this.marker = new Ext.Cat.AjaxMap.Marker();
         this.marker.setCoord(this.currPoint);
-        this.marker.setIcon(new Ext.Cat.AjaxMap.Icon(12, 20, this.cursorImg));
+        this.marker.setIcon(Ext.create('iCatMap.MarkerIcon', {
+            width: 12,
+            height: 20,
+            src: this.cursorImg
+        }));
         //this.marker.setInfo('附近有3人');
 
         this.marker.setToMap(this.mapDiv, toolbar.model);

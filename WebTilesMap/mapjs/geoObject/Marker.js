@@ -104,12 +104,42 @@ Ext.extend(Ext.Cat.AjaxMap.Marker, Ext.Cat.AjaxMap.AbstractOverLayer, {
         Ext.get(this.infoDivId).dom.innerHTML = this.info;
     }
 });
-
+/*
 Ext.Cat.AjaxMap.Icon = function (w, h, src) {
     this.width = w;
     this.height = h;
     this.src = src;
 };
+*/
+Ext.define('iCatMap.Marker', {
+    backColor: '#ff0000',
+    offsetTop: (offsetTop == null) ? 0 : offsetTop,
+    offsetLeft: (offsetLeft == null) ? 0 : offsetLeft,
+    prefixId: (prefixId == null) ? 'Over_Marker' : 'Over_' + prefixId,
+    constructor: function () {
+        if (markerId) {
+            this.id = this.prefixId + "_" + markerId;
+            this.infoDivId = this.prefixId + "_Info_" + markerId;
+        }
+        else {
+            this.id = Util.createUniqueID(this.prefixId + "_");
+            this.infoDivId = Util.createUniqueID(this.prefixId + "_Info");
+        }
+    }
+});
+
+Ext.define('iCatMap.MarkerIcon', {
+    width: 0,
+    height: 0,
+    src: '',
+    constructor: function () {
+        var me = this;
+
+        if (config) {
+            Ext.apply(me, config);
+        }
+    }
+});
 
 function hideInfoWindown(e, windowId) {
     var infoWindow = $(windowId);

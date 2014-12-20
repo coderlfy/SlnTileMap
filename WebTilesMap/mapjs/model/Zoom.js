@@ -1,4 +1,5 @@
-﻿Ext.Cat.AjaxMap.Zoom = function (level) {
+﻿/*
+Ext.Cat.AjaxMap.Zoom = function (level) {
     this.level = level;
     this.tileCols = Ext.Cat.MapConfig.FirstZoomTileCols * Math.pow(2, (this.level - 1));
     this.tileRows = Ext.Cat.MapConfig.FirstZoomTileRows * Math.pow(2, (this.level - 1));
@@ -72,13 +73,15 @@ Ext.Cat.AjaxMap.Zoom.prototype = {
         }
     }
 }
-/*
+*/
 Ext.define('iCatMap.Zoom', {
     level: 2,
     tileCols: 4,
     tileRows: 2,
     tileNum: null,
-    //scale:
+    scale:null,
+    realMapBound: null,
+
     constructor: function (config) {
         var me = this;
 
@@ -86,28 +89,83 @@ Ext.define('iCatMap.Zoom', {
             Ext.apply(me, config);
         }
 
-
+        me.tileCols = iCatMap.MapConfig.FirstZoomTileCols * Math.pow(2, (this.level - 1));
+        me.tileRows = iCatMap.MapConfig.FirstZoomTileRows * Math.pow(2, (this.level - 1));
+        me.tileNum = me.tileCols * me.tileRows;
+        me.scale = iCatMap.MapConfig.FullWidth / (me.tileCols * iCatMap.MapConfig.TileSize * 2.54 / 100 / 96);
+        me.realMapBound = iCatMap.MapConfig.FullExtent;
     },
-    getRow: function () {
-        return this.row;
-    },
+    getViewBound: function (container) {
+        var width = container.clientWidth;
+        var height = container.clientHeight;
 
-    getColumn: function () {
-        return this.column;
+        this.viewBound = this.realMapBound.getCenterCoord().getBound(
+            width * this.realMapBound.getWidth() / (this.tileCols * Ext.Cat.MapConfig.TileSize),
+            height * this.realMapBound.getHeight() / (this.tileRows * Ext.Cat.MapConfig.TileSize));
+
+        return this.viewBound;
     },
 
     getLevel: function () {
         return this.level;
     },
 
-    getMapModel: function () {
-        return this.model;
+    getTileCols: function () {
+        return this.tileCols;
     },
 
-    getSrc: function () {
-        return this.model.getCurrentMapType().getSrc(this.level, this.row, this.column);
-    }
+    getTileRows: function () {
+        return this.tileRows;
+    },
 
+    getScale: function () {
+        return this.scale;
+    },
+
+    getTiles: function (model, container) {
+        var coord = model.getViewCenterCoord();
+        var viewBound = this.getViewBound(container);
+
+        if (viewBound.getCenterCoord() != coord) {
+            viewBound = viewBound.clone(coord);
+        }
+        if (!this.realMapBound.isCover(viewBound)) {
+            return null;
+        }
+        else {
+            var tiles = new Array();
+            var rowFrom = Math.floor((this.realMapBound.getMaxY() - viewBound.getMaxY()) / (this.realMapBound.getHeight() / this.tileRows));
+            rowFrom = rowFrom < 0 ? 0 : rowFrom;
+
+            var rowTo = Math.floor((viewBound.getMinY() - this.realMapBound.getMinY()) / (this.realMapBound.getHeight() / this.tileRows));
+            rowTo = rowTo < 0 ? this.tileRows : (this.tileRows - rowTo);
+
+            var colFrom = Math.floor((viewBound.getMinX() - this.realMapBound.getMinX()) / (this.realMapBound.getWidth() / this.tileCols));
+            colFrom = colFrom < 0 ? 0 : colFrom;
+
+            var colTo = Math.floor((this.realMapBound.getMaxX() - viewBound.getMaxX()) / (this.realMapBound.getWidth() / this.tileCols));
+            colTo = colTo < 0 ? this.tileCols : (this.tileCols - colTo);
+
+
+            var delta = 1;
+            rowFrom = rowFrom - delta < 0 ? 0 : rowFrom - delta;
+            rowTo = rowTo + delta > this.tileRows ? this.tileRows : rowTo + delta;
+            colFrom = colFrom - delta < 0 ? 0 : colFrom - delta;
+            colTo = colTo + delta > this.tileCols ? this.tileCols : colTo + delta;
+
+            for (var i = rowFrom; i < rowTo; i++) {
+                for (var j = colFrom; j < colTo; j++) {
+                    var tile = Ext.create('iCatMap.Tile', {
+                        row: i,
+                        column: j,
+                        level: this.level,
+                        model: model
+                    });
+                    tiles.push(tile);
+                }
+            }
+            return tiles;
+        }
+    }
 });
 
-*/

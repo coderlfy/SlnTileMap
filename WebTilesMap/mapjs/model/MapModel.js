@@ -1,6 +1,7 @@
 ﻿/// <reference path="../extjs/ext-base.js" />
 /// <reference path="../extjs/ext-all.js" />
 /// <reference path="Util.js" />
+/*
 Ext.Cat.AjaxMap.MapModel = function (id) {
     this.modelId = id;
     this.mapTypes = new Object();
@@ -97,10 +98,12 @@ Ext.Cat.AjaxMap.MapModel.prototype = {
         }
     }
 }
-/*
-MapModel = Class.create();
-MapModel.prototype = {
-    OvContainer:null,
+*/
+
+Ext.define('iCatMap.MapModel', {
+    modelId : null,
+    mapTypes: new Object(),
+    OvContainer: null,
     controls: new Object(),
     ovId: null,
     defaultCenterPoint: null,
@@ -108,94 +111,99 @@ MapModel.prototype = {
     overlays: null,
     traceIndex: 0,
     traces: new Object(),
-    curIndex:-1,
+    curIndex: -1,
     mapTypeIds: new Array(),
-    
-    initialize: function(id){
-        this.modelId = id;
-        this.mapTypes = new Object();
+
+    constructor: function (config) {
+        var me = this;
+
+        if (config) {
+            Ext.apply(me, config);
+        }
     },
-    
-    getZoom: function(){
+
+
+    getZoom: function () {
         return this.zoom;
     },
-    
-    setZoom: function(zoom){
+
+    setZoom: function (zoom) {
         this.zoom = zoom;
     },
-    
-    setViewCenterCoord: function(centerCoord){
+
+    setViewCenterCoord: function (centerCoord) {
         this.viewCenterCoord = centerCoord;
     },
-    
-    getViewCenterCoord: function(){
+
+    getViewCenterCoord: function () {
         return this.viewCenterCoord;
     },
-    
-    getViewBound: function(){
+
+    getViewBound: function () {
         return this.viewBound;
     },
-    
-    setViewBound: function(bound){
+
+    setViewBound: function (bound) {
         this.viewBound = bound;
     },
-    
-    setCurrentMapType: function(type){
+
+    setCurrentMapType: function (type) {
         this.currentMapType = type;
     },
-    
-    getCurrentMapType: function(){
+
+    getCurrentMapType: function () {
         return this.currentMapType;
     },
-    
-    getId: function(){
+
+    getId: function () {
         return this.modelId;
-    }, 
-    
-    getOvContainer: function(){
+    },
+
+    getOvContainer: function () {
         return this.OvContainer;
     },
-    
-    getOvMapDiv: function(){
+
+    getOvMapDiv: function () {
         return this.OvContainer.childNodes[0];
     },
-    
-    setOvContainer: function(ovContainer, id){
+
+    setOvContainer: function (ovContainer, id) {
         this.OvContainer = ovContainer;
         this.ovId = id;
-    },    
-    
-    getOvModel: function(){        
-        var newModel = new MapModel(Util.createUniqueID());
+    },
+
+    getOvModel: function () {
+        var newModel = Ext.create('iCatMap.MapModel', {
+            modelId: iCatMap.Util.createUniqueID()
+        });
         newModel.setViewCenterCoord(this.getViewCenterCoord());
-        if(this.getZoom().getLevel()-2<=1)
+        if (this.getZoom().getLevel() - 2 <= 1)
             ovLevel = 1
         else
-            ovLevel = this.getZoom().getLevel()-2;
-        var zoom = new Zoom(ovLevel);       
+            ovLevel = this.getZoom().getLevel() - 2;
+        var zoom = Ext.create('iCatMap.Zoom', {
+            level: ovLevel
+        });
         newModel.setZoom(zoom);
         newModel.setCurrentMapType(this.getCurrentMapType());
         newModel.setViewBound(zoom.getViewBound(this.OvContainer));
         return newModel;
     },
-    
-    reset: function(mapDiv, elm){
+
+    reset: function (mapDiv, elm) {
         this.setViewCenterCoord(this.defaultCenterPoint.getCoord());
-	    this.setZoom(new Zoom(this.defaultLevel));
-	    this.controls[mapDiv.id].paint(this, true);
-		this.controls[this.ovId].paint(this);
-		elm.style.top = ((MaxZoomLevel - this.defaultLevel) * 12 + 6) + "px"
+        this.setZoom(new Zoom(this.defaultLevel));
+        this.controls[mapDiv.id].paint(this, true);
+        this.controls[this.ovId].paint(this);
+        elm.style.top = ((iCatMap.MapConfig.MaxZoomLevel - this.defaultLevel) * 12 + 6) + "px";
     },
-    
-    clearOverLayers: function(mapDiv){
-        if(this.overlays){
-            for(var i=0; i<this.overlays.length; i++){
+
+    clearOverLayers: function (mapDiv) {
+        if (this.overlays) {
+            for (var i = 0; i < this.overlays.length; i++) {
                 this.overlays[i].remove();
-            }            
-            this.overlays.clear();
+            }
+            this.overlays.length = 0;
         }
-    }  
-    
-};*/
-
-
+    }
+});
