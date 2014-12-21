@@ -43,7 +43,7 @@ Ext.define('iCatMap.MapControl', {
         }
 
         if (me.id) {
-            me.mapDiv = Util.createDiv(id);
+            me.mapDiv = iCatMap.Util.createDiv(config.id);
             me.mapDiv.style.position = "absolute";
             me.mapDiv.style.zIndex = 0;
             me.mapDiv.style.cursor = "move";
@@ -61,7 +61,6 @@ Ext.define('iCatMap.MapControl', {
     },
     paint: function (model, isTracing) {
         var me = this;
-
         var curZoom = model.getZoom();
         var viewBound = curZoom.getViewBound(me.container.dom).clone(model.getViewCenterCoord());
         var mapBound = curZoom.realMapBound;

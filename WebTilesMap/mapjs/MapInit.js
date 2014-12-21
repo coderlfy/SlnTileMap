@@ -1,14 +1,18 @@
 ﻿MapInit = function (lx, baseStores, mWidth, mHeight) {
-    Ext.Cat.MapConfig.FullExtent = new Ext.Cat.AjaxMap.Bound(0, 100e16, 0, 50e16); //113.65e16, 114.75e16, 22.35e16, 22.9e16
-    Ext.Cat.MapConfig.FullWidth = Util.distanceByLnglat(
-        Ext.Cat.MapConfig.FullExtent.getMinX() / 1e16,
-        Ext.Cat.MapConfig.FullExtent.getMinY() / 1e16,
-        Ext.Cat.MapConfig.FullExtent.getMaxX() / 1e16,
-        Ext.Cat.MapConfig.FullExtent.getMaxY() / 1e16);
+    iCatMap.MapConfig.FullExtent = Ext.create('iCatMap.Bound', {
+        minX: 0,
+        maxX: 100e16,
+        minY: 0,
+        maxY: 50e16
+    }); //113.65e16, 114.75e16, 22.35e16, 22.9e16
+    iCatMap.MapConfig.FullWidth = iCatMap.Util.distanceByLnglat(
+        iCatMap.MapConfig.FullExtent.getMinX() / 1e16,
+        iCatMap.MapConfig.FullExtent.getMinY() / 1e16,
+        iCatMap.MapConfig.FullExtent.getMaxX() / 1e16,
+        iCatMap.MapConfig.FullExtent.getMaxY() / 1e16);
 
-    var mapTbar = new Ext.Toolbar();
-    var mapPanel = new Ext.Panel({
-        renderTo: "divID1",
+    var mapPanel = Ext.create('Ext.panel.Panel', {
+        //renderTo: "divID1",
         height: 540,
         width: '100%',
         layout: 'fit',
@@ -17,24 +21,49 @@
         bodyCfg: {
             tag: 'div',
             cls: 'loginbgimage'
-        },
-        tbar: mapTbar
+        }
     });
-    var map = new Ext.Cat.AjaxMap.Map(mapPanel, mWidth, mHeight);
-    var setMapType = new Ext.Cat.AjaxMap.SZMapType({
-        dirSrc: Ext.Cat.MapConfig.ImageBaseDir + '2d/',
-        enImg: 'map2.gif',
-        disImg: 'map1.gif',
-        firstRows: 1,
-        firstCols: 2
+    var map = null;
+    var wlogpersonlogtopwindow = Ext.create('Ext.window.Window', {
+        title: '单地图显示',
+        width: 800,
+        height: 500,
+        minWidth: 800,
+        minHeight: 500,
+        items: mapPanel,
+        listeners: {
+            'afterrender': function () {
+            },
+            'show': function () {
+                map = Ext.create('iCatMap.Map', {
+                    container: mapPanel,
+                    mWidth: mWidth,
+                    mHeight: mHeight
+                });
+                var setMapType = Ext.create('iCatMap.MapType', {
+                    dirSrc: iCatMap.MapConfig.ImageBaseDir + '2d/',
+                    enImg: 'map2.gif',
+                    disImg: 'map1.gif',
+                    firstRows: 1,
+                    firstCols: 2
+                });
+
+                map.addMapType(setMapType, true);
+                map.setCenter(Ext.create('iCatMap.Point', {
+                    x: 50,
+                    Y: 23.5
+                }), iCatMap.MapConfig.DefaultLevel);
+                var toolbar = iCatMap.MapTbarConfig.CreateMarkBasestation(mapPanel, null); //配置tbar按钮
+                map.addToolBar(toolbar);
+
+                
+                
+            }
+        }
     });
-
-    map.addMapType(setMapType, true);
-    map.setCenter(new Ext.Cat.AjaxMap.Point(50, 23.5), Ext.Cat.MapConfig.DefaultLevel);
-
-    var toolbar = Ext.Cat.AjaxMap.MapTbarConfig.CreatePerLocationSys(mapTbar, mapPanel, baseStores); //配置tbar按钮
-    map.addToolBar(toolbar);
-
+    wlogpersonlogtopwindow.show();
+    //iCatMap.MapTbarConfig.tbar.render(mapPanel.tbar);
+    /*
     if (baseStores)
         baseStores.each(function (record) {
 
@@ -45,6 +74,7 @@
 
             marker.setToMap(toolbar.mapDiv, toolbar.model);
         });
+    */
     /*
     if (lx == 2) {
         var fn = function () {

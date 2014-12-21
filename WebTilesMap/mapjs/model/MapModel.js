@@ -113,7 +113,10 @@ Ext.define('iCatMap.MapModel', {
     traces: new Object(),
     curIndex: -1,
     mapTypeIds: new Array(),
-
+    zoom: null,
+    viewCenterCoord: null,
+    viewBound: null,
+    currentMapType: null,
     constructor: function (config) {
         var me = this;
 

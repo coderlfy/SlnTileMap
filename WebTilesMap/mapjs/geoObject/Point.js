@@ -35,8 +35,8 @@ Ext.define('iCatMap.Point', {
         }
 
         me.coord = Ext.create('iCatMap.Coordinate', {
-            x: x * 1e16,
-            y: y * 1e16
+            x: me.x * 1e16,
+            y: me.y * 1e16
         });
     },
     getCoord: function () {

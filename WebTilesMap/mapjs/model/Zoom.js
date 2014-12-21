@@ -100,8 +100,8 @@ Ext.define('iCatMap.Zoom', {
         var height = container.clientHeight;
 
         this.viewBound = this.realMapBound.getCenterCoord().getBound(
-            width * this.realMapBound.getWidth() / (this.tileCols * Ext.Cat.MapConfig.TileSize),
-            height * this.realMapBound.getHeight() / (this.tileRows * Ext.Cat.MapConfig.TileSize));
+            width * this.realMapBound.getWidth() / (this.tileCols * iCatMap.MapConfig.TileSize),
+            height * this.realMapBound.getHeight() / (this.tileRows * iCatMap.MapConfig.TileSize));
 
         return this.viewBound;
     },

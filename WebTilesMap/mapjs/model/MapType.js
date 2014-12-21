@@ -98,7 +98,7 @@ Ext.define('iCatMap.MapType', {
     dirSrc: '',
     firstRows: 0,
     firstCols: 0,
-    constructor: function () {
+    constructor: function (config) {
         var me = this;
 
         if (config) {

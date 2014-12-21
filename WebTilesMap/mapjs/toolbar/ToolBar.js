@@ -1,4 +1,5 @@
-﻿Ext.Cat.AjaxMap.ToolBar = function (container) {
+﻿/*
+Ext.Cat.AjaxMap.ToolBar = function (container) {
     this.container = container;
     //this.bar = Util.createDiv(Util.createUniqueID('Tool_'));
     this.tbar = container.tbar;
@@ -39,7 +40,7 @@ Ext.Cat.AjaxMap.ToolBar.prototype = {
     },
 
     clearCurrentToolStatus: function () {
-        /*
+        ///--------------
         var toolDivs = this.bar.childNodes;
         for (var i = 0; i < toolDivs.length; i++) {
         var tool = this.tools[toolDivs[i].id]
@@ -48,7 +49,7 @@ Ext.Cat.AjaxMap.ToolBar.prototype = {
         toolDivs[i].childNodes[0].src = tool.img_normal;
         }
         }
-        */
+        --------//
         //        this.currentTool.div.childNodes[0].src = this.currentTool.img_normal;
         //        this.currentTool.selected = false;
 
@@ -92,14 +93,21 @@ Ext.Cat.AjaxMap.ToolBar.prototype = {
     }
 
 }
-Ext.Cat.AjaxMap.MapTbarConfig = {
-    CreateMarkBasestation: function (mapTbar, mapPanel, baseStationStore) {
-        var toolbar = new Ext.Cat.AjaxMap.ToolBar(mapPanel);
-        var panTool = new Ext.Cat.AjaxMap.PanTool({
+*/
+iCatMap.MapTbarConfig = {
+    tbar: null,
+    CreateMarkBasestation: function (mapPanel, baseStationStore) {
+        var mapTbar = Ext.create('Ext.toolbar.Toolbar', {
+            renderTo: mapPanel.tbar
+        });
+
+        var toolbar = Ext.create('iCatMap.ToolBar', { container: mapPanel });
+        var panTool = Ext.create('iCatMap.PanTool', {
             id: 'pan',
             text: '移动',
             iconCls: 'icon-move'
         });
+        /*
         var zoomInTool = new Ext.Cat.AjaxMap.ZoominTool({
             id: 'zoomin',
             text: '局部放大',
@@ -122,8 +130,10 @@ Ext.Cat.AjaxMap.MapTbarConfig = {
         });
         markbasestationTool.cursorStyle = 'url(' + baseStationImg + '),pointer';
         markbasestationTool.alt = '标定基站';
-
+        */
         toolbar.addTool(mapTbar, panTool, true);
+        this.tbar = mapTbar;
+        /*
         mapTbar.addSeparator();
         toolbar.addTool(mapTbar, zoomInTool);
         mapTbar.addSeparator();
@@ -131,8 +141,10 @@ Ext.Cat.AjaxMap.MapTbarConfig = {
         mapTbar.addSeparator();
         toolbar.addTool(mapTbar, markbasestationTool);
         mapTbar.addSeparator();
+        */
         return toolbar;
-    },
+    }/*,
+
     CreateBasestationStatus: function (mapTbar, mapPanel, baseStationStore) {
         var toolbar = new Ext.Cat.AjaxMap.ToolBar(mapPanel);
         var panTool = new Ext.Cat.AjaxMap.PanTool({
@@ -277,4 +289,114 @@ Ext.Cat.AjaxMap.MapTbarConfig = {
         mapTbar.addSeparator();
         return toolbar;
     }
+    */
 }
+
+Ext.define('iCatMap.ToolBar', {
+    container: null,
+    tbar: null,
+    canvaspainter: null,
+    //this.container.appendChild(this.bar);
+    tools: new Object(),
+    currentTool: null,
+    constructor: function (config) {
+        var me = this;
+
+        if (config) {
+            Ext.apply(me, config);
+        }
+
+        me.tbar = me.container.tbar;
+
+    },
+    EVENT_TYPES: ["mouseover", "mouseout", "mousemove", "mousedown", "mouseup", "dblclick", "click"],
+
+    addTool: function (mapTbar, tool, isDefault) {
+        if (!tool)
+            return;
+        this.tools[tool.id] = tool;
+
+        if (isDefault) {
+            this.defaultTool = tool;
+            this.currentTool = tool;
+        }
+        mapTbar.add({
+            xtype: 'button',
+            text: tool.text,
+            id: tool.id,
+            iconCls: tool.iconCls,
+            handler: tool.barClickHandler,
+            scope: this
+        });
+
+        return mapTbar;
+    },
+
+    addCommand: function (cmd) {
+        if (!cmd)
+            return;
+        this.tools[cmd.id] = cmd;
+        this.bar.appendChild(cmd.div);
+        //注册工具栏按钮事件；
+        //Event.observe(cmd.div, "mouseout", cmd.cmdMouseOutHandler.bindAsEventListener(this));
+        //Event.observe(cmd.div, "mouseover", cmd.cmdMouseOverHandler.bindAsEventListener(this));
+        //Event.observe(cmd.div, "click", cmd.cmdClickHandler.bindAsEventListener(this));
+    },
+
+    setMapModel: function (model) {
+        this.model = model;
+    },
+
+    clearCurrentToolStatus: function () {
+        /*
+        var toolDivs = this.bar.childNodes;
+        for (var i = 0; i < toolDivs.length; i++) {
+        var tool = this.tools[toolDivs[i].id]
+        if (tool.selected == true) {
+        tool.selected = false;
+        toolDivs[i].childNodes[0].src = tool.img_normal;
+        }
+        }
+        */
+        //        this.currentTool.div.childNodes[0].src = this.currentTool.img_normal;
+        //        this.currentTool.selected = false;
+
+    },
+
+    registerEventToMap: function (mapDiv) {
+        this.mapDiv = mapDiv;
+        Ext.get(this.mapDiv).on('mousedown', this.mapMouseDownHandler, this);
+        Ext.get(this.mapDiv).on('mousemove', this.mapMouseMoveHandler, this);
+        Ext.get(this.mapDiv).on('mouseup', this.mapMouseUpHandler, this);
+        Ext.get(this.mapDiv).on('dblclick', this.mapDblclickHandler, this);
+        Ext.get(this.mapDiv).on('click', this.mapClickHandler, this);
+    },
+
+    mapMouseDownHandler: function (e) {
+        if (this.currentTool == null || this.tools[this.currentTool.id].toolType == "Command")
+            return;
+        this.tools[this.currentTool.id].mouseDownHandler(e, this);
+    },
+    mapMouseMoveHandler: function (e) {
+        if (this.currentTool == null || this.tools[this.currentTool.id].toolType == "Command")
+            return;
+        this.tools[this.currentTool.id].mouseMoveHandler(e, this);
+    },
+    mapMouseUpHandler: function (e) {
+        if (this.currentTool == null || this.tools[this.currentTool.id].toolType == "Command")
+            return;
+        this.tools[this.currentTool.id].mouseUpHandler(e, this);
+    },
+
+    mapClickHandler: function (e) {
+        if (this.currentTool == null || this.tools[this.currentTool.id].toolType == "Command")
+            return;
+        this.tools[this.currentTool.id].clickHandler(e, this);
+    },
+
+    mapDblclickHandler: function (e) {
+        if (this.currentTool == null || this.tools[this.currentTool.id].toolType == "Command")
+            return;
+        this.tools[this.currentTool.id].dblClickHandler(e, this);
+    }
+});

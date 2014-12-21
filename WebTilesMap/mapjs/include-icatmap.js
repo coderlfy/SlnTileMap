@@ -21,12 +21,11 @@
     var ICatMapJsFilesPath = [
         'namespces',
         'canvas/Base', 'canvas/IE8canvas', 'canvas/Widget', 'canvas/Painter', 'canvas/CPWidgets', 'canvas/CPDrawing', 'canvas/CPAnimator',
-        'Util.js', 'model/Tile', 'geoObject/Bound', 'geoObject/Coordinate', 'geoObject/Point', 'model/OverLayer', 'geoObject/Polyline', 'MapConfig.js',//'Map.js', 'MapInit.js',
-        'controls/Control', 'controls/MapControl', 'geoObject/Rectangle', 'model/Zoom', 'model/MapModel', 'model/MapType'//, 'controls/ScaleControl',
-        //, 'geoObject/Canvas', 'geoObject/Marker',
-        //,
-        //'toolbar/AbstractTool', 'toolbar/EventMarkBaseStation', 'toolbar/EventMarkSensor', 'toolbar/EventMarkSubStation', 'toolbar/EventMarkTrackerPointer', 'toolbar/EventTracker',
-        //'toolbar/ToolBar', 'toolbar/ToolMark', 'toolbar/ToolMarkTrackerPoint', 'toolbar/ToolMeasure', 'toolbar/ToolPan', 'toolbar/ToolTrack', 'toolbar/ToolZoomin', 'toolbar/ToolZoomout'
+        'Util.js', 'model/Tile', 'geoObject/Bound', 'geoObject/Coordinate', 'geoObject/Point', 'model/OverLayer', 'geoObject/Polyline', 'MapConfig.js',//,
+        'controls/Control', 'controls/MapControl', 'geoObject/Rectangle', 'model/Zoom', 'model/MapModel', 'model/MapType',//, 'controls/ScaleControl',
+        'geoObject/Canvas', 'geoObject/Marker', 'Map.js', 'MapInit.js',
+        'toolbar/AbstractTool', 'toolbar/ToolPan', 'toolbar/ToolBar'//, 'toolbar/EventMarkBaseStation', 'toolbar/EventMarkSensor', 'toolbar/EventMarkSubStation', 'toolbar/EventMarkTrackerPointer', 'toolbar/EventTracker',
+        //, 'toolbar/ToolMark', 'toolbar/ToolMarkTrackerPoint', 'toolbar/ToolMeasure', 'toolbar/ToolTrack', 'toolbar/ToolZoomin', 'toolbar/ToolZoomout'
     ];
     var currentpath = getCurrentPath();
     for (var index in ICatMapJsFilesPath) {
