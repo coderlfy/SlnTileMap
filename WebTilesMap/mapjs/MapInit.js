@@ -11,19 +11,17 @@
         iCatMap.MapConfig.FullExtent.getMaxX() / 1e16,
         iCatMap.MapConfig.FullExtent.getMaxY() / 1e16);
 
+    var tbar = Ext.create('Ext.toolbar.Toolbar');
     var mapPanel = Ext.create('Ext.panel.Panel', {
-        //renderTo: "divID1",
-        height: 540,
+        height: 1024,
         width: '100%',
         layout: 'fit',
         plain: true,
         border: true,
-        bodyCfg: {
-            tag: 'div',
-            cls: 'loginbgimage'
-        }
+        tbar: tbar,
+        bodyStyle: 'background: url(../maps/iaspec_bottom.png) repeat;'
+        //bodyCls: 'loginbgimage'
     });
-    var map = null;
     var wlogpersonlogtopwindow = Ext.create('Ext.window.Window', {
         title: '单地图显示',
         width: 800,
@@ -31,11 +29,10 @@
         minWidth: 800,
         minHeight: 500,
         items: mapPanel,
+        maximizable:true,
         listeners: {
-            'afterrender': function () {
-            },
             'show': function () {
-                map = Ext.create('iCatMap.Map', {
+                var map = Ext.create('iCatMap.Map', {
                     container: mapPanel,
                     mWidth: mWidth,
                     mHeight: mHeight
@@ -53,11 +50,9 @@
                     x: 50,
                     Y: 23.5
                 }), iCatMap.MapConfig.DefaultLevel);
-                var toolbar = iCatMap.MapTbarConfig.CreateMarkBasestation(mapPanel, null); //配置tbar按钮
+                var toolbar = iCatMap.MapTbarConfig.CreateMarkBasestation(tbar, mapPanel, null); //配置tbar按钮
                 map.addToolBar(toolbar);
 
-                
-                
             }
         }
     });

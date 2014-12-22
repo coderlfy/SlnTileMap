@@ -1,0 +1,116 @@
+﻿.icon-addRecord {
+    background-image: url(../images/104.gif) !important;
+}
+.icon-editRecord {
+    background-image: url(../images/106.gif) !important;
+}
+.icon-deleteRecord {
+    background-image: url(../images/105.gif) !important;
+}
+.icon-queryRecord {
+    background-image: url(../images/107.gif) !important;
+}
+.icon-clearqueryRecord {
+    background-image: url(../images/155.gif) !important;
+}
+.icon-inquiryRecord {
+    background-image: url(../images/108.gif) !important;
+}
+.icon-refreshRecord {
+    background-image: url(../images/225.gif) !important; 
+}
+.icon-addReverseRecord {
+    background-image: url(../images/175.gif) !important; 
+}
+.icon-deleteAllTrackerRecord {
+    background-image: url(../images/134.gif) !important; 
+}
+.icon-excel {
+    background-image: url(../images/excel.png) !important;
+}
+.icon-warning
+{
+	background-image: url(../images/icon-warning.png) !important;
+}
+.icon-horn
+{
+	background-image: url(../images/290.gif) !important;
+}
+.icon-maperaser
+{
+	background-image: url(../maps/business/eraser.gif) !important;
+}
+.icon-subordinateRecord {
+    background-image: url(../images/094.gif) !important;
+}
+/*
+.loginbgimage
+{
+    background: url(../maps/iaspec_bottom.png) repeat; 
+}*/
+.icon-downloadhelpdoc
+{
+    background-image: url(../images/158.gif) !important;
+}
+.exit-system
+{
+    background-image: url(../images/114.gif) !important;
+}
+.icon-outage
+{
+    background-image: url(../images/red.gif) !important;
+}
+.icon-replyMessage
+{
+    background-image: url(../images/green.gif) !important;
+}
+.icon-status
+{
+    background-image: url(../images/status.gif) !important;
+}
+
+.icon-move {
+    background-image: url(../resources/Move.gif) !important;
+}
+.icon-zoomin {
+    background-image: url(../resources/icon_zoomin.gif) !important;
+}
+.icon-zoomout {
+    background-image: url(../resources/icon_zoomout.gif) !important;
+}
+.icon-markstation{
+    background-image: url(../maps/base/markstation.gif) !important;
+}
+.icon-marktracker{
+    background-image: url(../maps/business/marktracker.gif) !important;
+}
+.icon-trackersort{
+    background-image: url(../maps/business/sort.gif) !important;
+}
+.icon-markline{
+    background-image: url(../maps/business/line.gif) !important;
+}
+.icon-marksensor{
+    background-image: url(../maps/base/marksensor.gif) !important;
+}
+.icon-tracktool{
+    background-image: url(../maps/base/ico_track.gif) !important;
+}
+.icon-Rmove {
+    background-image: url(../resources/Rmove.gif) !important;
+}
+.icon-measure {
+    background-image: url(../resources/measure.gif) !important;
+}
+.icon-ry {
+    background-image: url(../resources/forum.gif) !important;
+}
+.icon-jz {
+    background-image: url(../resources/ser-o.gif) !important;
+}
+.icon-cl {
+    background-image: url(../resources/event.gif) !important;
+}
+.icon-shezhi {
+    background-image: url(../resources/example.gif) !important;
+}

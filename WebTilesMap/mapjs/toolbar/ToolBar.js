@@ -95,12 +95,7 @@ Ext.Cat.AjaxMap.ToolBar.prototype = {
 }
 */
 iCatMap.MapTbarConfig = {
-    tbar: null,
-    CreateMarkBasestation: function (mapPanel, baseStationStore) {
-        var mapTbar = Ext.create('Ext.toolbar.Toolbar', {
-            renderTo: mapPanel.tbar
-        });
-
+    CreateMarkBasestation: function (tbar, mapPanel, baseStationStore) {
         var toolbar = Ext.create('iCatMap.ToolBar', { container: mapPanel });
         var panTool = Ext.create('iCatMap.PanTool', {
             id: 'pan',
@@ -131,8 +126,8 @@ iCatMap.MapTbarConfig = {
         markbasestationTool.cursorStyle = 'url(' + baseStationImg + '),pointer';
         markbasestationTool.alt = '标定基站';
         */
-        toolbar.addTool(mapTbar, panTool, true);
-        this.tbar = mapTbar;
+        //console.log(mapPanel);
+        toolbar.addTool(tbar, panTool, true);
         /*
         mapTbar.addSeparator();
         toolbar.addTool(mapTbar, zoomInTool);
