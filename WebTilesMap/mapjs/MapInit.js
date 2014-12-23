@@ -29,6 +29,7 @@
         minWidth: 800,
         minHeight: 500,
         items: mapPanel,
+        layout: 'fit',
         maximizable:true,
         listeners: {
             'show': function () {
