@@ -13,9 +13,6 @@
 
     var tbar = Ext.create('Ext.toolbar.Toolbar');
     var mapPanel = Ext.create('Ext.panel.Panel', {
-        height: 1024,
-        width: '100%',
-        layout: 'fit',
         plain: true,
         border: true,
         tbar: tbar,
@@ -49,7 +46,7 @@
                 map.addMapType(setMapType, true);
                 map.setCenter(Ext.create('iCatMap.Point', {
                     x: 50,
-                    Y: 23.5
+                    y: 23.5
                 }), iCatMap.MapConfig.DefaultLevel);
                 var toolbar = iCatMap.MapTbarConfig.CreateMarkBasestation(tbar, mapPanel, null); //配置tbar按钮
                 map.addToolBar(toolbar);

@@ -1,5 +1,5 @@
 ﻿iCatMap.MapConfig = {
-    ImageBaseDir: '../../../maps/',
+    ImageBaseDir: '../maps/',
     TileSize: 256,
     MaxZoomLevel: 4,
     DefaultLevel: 2,

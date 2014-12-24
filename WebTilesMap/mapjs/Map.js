@@ -74,7 +74,7 @@ Ext.define('iCatMap.Map', {
         me.mapId = iCatMap.Util.createUniqueID();
         me.containerWidth = me.container.body.dom.clientWidth;
         me.containerHeight = me.container.body.dom.clientHeight;
-        me.model = Ext.create('iCatMap.MapModel', { id: this.mapId });
+        me.model = Ext.create('iCatMap.MapModel', { modelId: me.mapId });
         //this.container.body.dom.style.width = config.mWidth;
         //this.container.body.dom.style.height = config.mHeight;
         me.mapControl = Ext.create('iCatMap.MapControl', {
