@@ -152,7 +152,7 @@ Ext.define('iCatMap.AbstractControl', {
                     }
                 }
 
-                if (!isExist) {
+                if (!isExist) { 
                     var deltaX = tiles[i].getColumn() * iCatMap.MapConfig.TileSize;
                     var deltaY = tiles[i].getRow() * iCatMap.MapConfig.TileSize;
                     var tile = document.createElement("div");
